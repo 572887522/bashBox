@@ -27,6 +27,7 @@ bashBox::~bashBox()
 
 void bashBox::reSetUI(Ui::bashBox *ui)
 {
+    ui->tabWidget->setCurrentIndex(0);
     shortBoxs = new QVector<shortBox*>();
 
     glayout = new QGridLayout(ui->tab);
@@ -36,6 +37,7 @@ void bashBox::reSetUI(Ui::bashBox *ui)
     {
         shortBox *shBox = new shortBox(QString("label %1").arg(i+1));
         shBox->setFixedSize(50,50);
+        shBox->setAcceptDrops(true);
         shortBoxs->push_back(shBox);
 
         glayout->addWidget(shBox, i/TABWIDGETCOLUMN, i%TABWIDGETCOLUMN);

@@ -11,11 +11,11 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     bashbox.cpp \
-    unitclass.cpp
+    unitbox.cpp
 
 HEADERS += \
     bashbox.h \
-    unitclass.h
+    unitbox.h
 
 FORMS += \
     bashbox.ui

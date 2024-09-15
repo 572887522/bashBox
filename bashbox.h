@@ -7,7 +7,7 @@
 #include <QVector>
 #include <QString>
 #include <QPushButton>
-#include "unitclass.h"
+#include "unitbox.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,7 +16,7 @@ class bashBox;
 QT_END_NAMESPACE
 
 
-using shortBox = QPushButton;
+using shortBox = UnitBox;
 #define MAXBOXNUMBER 20
 #define TABWIDGETCOLUMN 5
 
