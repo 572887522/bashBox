@@ -6,10 +6,10 @@ bashBox::bashBox(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::bashBox)
 {
-
     ui->setupUi(this);
 
-    reSetUI(ui);
+    initVariable();
+    reSetUI();
 
 
 }
@@ -25,20 +25,30 @@ bashBox::~bashBox()
     delete ui;
 }
 
-void bashBox::reSetUI(Ui::bashBox *ui)
+void bashBox::initVariable()
 {
-    ui->tabWidget->setCurrentIndex(0);
     shortBoxs = new QVector<shortBox*>();
-
     glayout = new QGridLayout(ui->tab);
-    glayout->setSpacing(10);
 
     for(int i = 0;i < MAXBOXNUMBER; i++)
     {
         shortBox *shBox = new shortBox(QString("label %1").arg(i+1));
+        shortBoxs->push_back(shBox);
+    }
+}
+
+void bashBox::reSetUI()
+{
+    ui->tabWidget->setCurrentIndex(0);
+
+    glayout->setSpacing(10);
+
+    for(int i = 0;i < MAXBOXNUMBER; i++)
+    {
+        shortBox *shBox = shortBoxs->at(i);
         shBox->setFixedSize(50,50);
         shBox->setAcceptDrops(true);
-        shortBoxs->push_back(shBox);
+        shBox->setFrameShape(QFrame::Box);
 
         glayout->addWidget(shBox, i/TABWIDGETCOLUMN, i%TABWIDGETCOLUMN);
     }

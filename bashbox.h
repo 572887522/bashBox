@@ -26,7 +26,7 @@ class bashBox : public QMainWindow
 
 private:
     Ui::bashBox *ui;
-    QVector<shortBox*> *shortBoxs;
+    QList<shortBox*> *shortBoxs;
     QGridLayout *glayout;
 
 public:
@@ -34,7 +34,8 @@ public:
     ~bashBox();
 
 private:
-    void reSetUI(Ui::bashBox *ui);
+    void initVariable();
+    void reSetUI();
 
 
 };
