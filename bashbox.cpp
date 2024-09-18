@@ -10,8 +10,6 @@ bashBox::bashBox(QWidget *parent)
 
     initVariable();
     reSetUI();
-
-
 }
 
 bashBox::~bashBox()
@@ -32,7 +30,7 @@ void bashBox::initVariable()
 
     for(int i = 0;i < MAXBOXNUMBER; i++)
     {
-        shortBox *shBox = new shortBox(QString("label %1").arg(i+1));
+        shortBox *shBox = new shortBox(this);
         shortBoxs->push_back(shBox);
     }
 }
@@ -48,7 +46,6 @@ void bashBox::reSetUI()
         shortBox *shBox = shortBoxs->at(i);
         shBox->setFixedSize(50,50);
         shBox->setAcceptDrops(true);
-        shBox->setFrameShape(QFrame::Box);
 
         glayout->addWidget(shBox, i/TABWIDGETCOLUMN, i%TABWIDGETCOLUMN);
     }

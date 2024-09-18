@@ -4,10 +4,15 @@ UnitBox::UnitBox(QWidget *parent)
     : QLabel{parent}
 {
     filePath = "";
+    qDebug() << "create unitBox";
 }
+UnitBox::UnitBox(QWidget *parent, QWidget *bashBox_)
+    : QLabel(parent), _bashBox(bashBox_)
+{}
 UnitBox::UnitBox(QString str)
     : QLabel{str}
 {}
+
 
 
 void UnitBox::dragEnterEvent(QDragEnterEvent *event) {
@@ -26,7 +31,7 @@ void UnitBox::dropEvent(QDropEvent *event)
     qDebug() << "drop Event";
     event->acceptProposedAction();
 
-    if(getFilePath(event) == false)
+    if(getFilePathFromDrop(event) == false)
     {
         qDebug() << "error: get file path failed!";
     }
@@ -45,20 +50,8 @@ void UnitBox::enterEvent(QEnterEvent *event)
     qDebug() << "enter Event";
 }
 
-void UnitBox::mousePressEvent()
-{
-    qDebug() << "mouse Press";
-}
 
-void UnitBox::mouseReleaseEvent(QMouseEvent* event)
-{
-    if(event->button() == Qt::LeftButton)
-        qDebug() << "left mouse release";
-    else
-        qDebug() << "right mouse release";
 
-    qDebug() << filePath;
-}
 
 void UnitBox::mouseDoubleClickEvent(QMouseEvent* event)
 {
@@ -77,10 +70,39 @@ void UnitBox::mouseDoubleClickEvent(QMouseEvent* event)
     openUrl(filePath);
 }
 
+void UnitBox::mousePressEvent(QMouseEvent *event)
+{
+    qDebug() << "mouse Press";
+    dragStartPosition = event->pos();
+}
+
+void UnitBox::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        // 计算移动的距离
+        int dx = event->pos().x() - dragStartPosition.x();
+        int dy = event->pos().y() - dragStartPosition.y();
+        // 移动控件
+        move(x() + dx, y() + dy);
+    }
+}
+
+void UnitBox::mouseReleaseEvent(QMouseEvent* event)
+{
+    if(event->button() == Qt::LeftButton)
+        qDebug() << "left mouse release";
+    else
+        qDebug() << "right mouse release";
+
+    qDebug() << filePath;
+}
 
 
 
-bool UnitBox::getFilePath(QDropEvent *event)
+
+
+
+bool UnitBox::getFilePathFromDrop(QDropEvent *event)
 {
     QList<QUrl> urls = event->mimeData()->urls();
     if(urls.size() != 1)

@@ -8,6 +8,7 @@
 #include <QString>
 #include <QPushButton>
 #include "unitbox.h"
+#include "lattice.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,7 +17,7 @@ class bashBox;
 QT_END_NAMESPACE
 
 
-using shortBox = UnitBox;
+using shortBox = Lattice;
 #define MAXBOXNUMBER 20
 #define TABWIDGETCOLUMN 5
 
