@@ -5,48 +5,39 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QString>
-#include <QDropEvent>
 #include <QDebug>
 #include <QMouseEvent>
 #include <QMimeData>
 #include <QDesktopServices>
-#include <QFileInfo>
-#include <QFileIconProvider>
 #include <QPoint>
+#include <QDrag>
 
 class UnitBox : public QLabel
 {
     Q_OBJECT
 
 private:
-    QWidget *_bashBox;
     QString filePath;
     QPixmap unitIcon;
-    QPoint dragStartPosition;
+    // QPoint dragStartPosition;
 
 
 public:
     explicit UnitBox(QWidget *parent = nullptr);
-    UnitBox(QWidget *parent, QWidget *bashBox);
     UnitBox(QString );
 
+    void setFilePath(const QString &path) {filePath = path;}
+    void setUnitIcon(const QPixmap &map) {unitIcon = map; setPixmap(unitIcon);}
     QString getFilePath() {return filePath;}
     QPixmap getUnitIcon() {return unitIcon;}
 
     // event
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
-    void enterEvent(QEnterEvent *);
+    void enterEvent(QEnterEvent *) override;
 
-    void mouseDoubleClickEvent(QMouseEvent* event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
-    bool getFilePathFromDrop(QDropEvent *event);
-    bool getPIconFromPath();
-    bool setIconToUnit();
     void openUrl(QString filePath);
     void resetPixMap(QPixmap &unitIcon);
 
