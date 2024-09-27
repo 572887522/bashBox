@@ -26,7 +26,7 @@ bashBox::~bashBox()
 void bashBox::initVariable()
 {
     shortBoxs = new QVector<shortBox*>();
-    glayout = new QGridLayout(ui->tab);
+    glayout = new flowLayout(ui->tab);
 
     for(int i = 0;i < MAXBOXNUMBER; i++)
     {
@@ -47,6 +47,6 @@ void bashBox::reSetUI()
         shBox->setFixedSize(50,50);
         shBox->setAcceptDrops(true);
 
-        glayout->addWidget(shBox, i/TABWIDGETCOLUMN, i%TABWIDGETCOLUMN);
+        glayout->addWidget(shBox);
     }
 }

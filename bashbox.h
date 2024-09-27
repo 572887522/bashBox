@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include "unitbox.h"
 #include "lattice.h"
+#include "flowlayout.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,7 +29,7 @@ class bashBox : public QMainWindow
 private:
     Ui::bashBox *ui;
     QList<shortBox*> *shortBoxs;
-    QGridLayout *glayout;
+    flowLayout *glayout;
 
 public:
     bashBox(QWidget *parent = nullptr);
